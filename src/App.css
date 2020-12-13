@@ -1,10 +1,35 @@
-.App {
-  text-align: center;
-}
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.game-details {
+  background-color: #007bff;
+  padding: 15px;
+}
+
+.genres, .platforms {
+  background-color: #f3f3ff;
+  padding: 5px;
+  font-size: 14px;
+  height: 45%;
+  margin-bottom: 15px;
+}
+
+.genres ul, .platforms ul {
+  list-style: none;
+  margin-left: -45px;
+  margin-top: 10px;
+}
+
+.genres li, .platforms li {
+  float: left;
+  margin-left: 5px;
+  color: #007bff;
+}
+
+.platforms {
+  height: 50%;
 }
 
 @media (prefers-reduced-motion: no-preference) {
