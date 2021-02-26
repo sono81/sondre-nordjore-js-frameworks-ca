@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import Alert from "react-bootstrap/Alert";
+import Success from "./Success";
 
 const schema = yup.object().shape({
   firstName: yup.string().min(2).required("Please enter your first name"),
@@ -19,30 +20,42 @@ function Contact() {
     validationSchema: schema,
   });
 
+  const [input, setInputs] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    message: "",
+  });
+  const [success, setSuccess] = useState(false);
+
   function onSubmit(data) {
     console.log("data", data);
+    setSuccess(true);
     //alert("Your message was sent with the following information:\n First name: " + data.firstName + "\n Last name: " + data.lastName + "\n Email: " + data.email + "\n Message: " + data.message);
-
-    let formSuccess = document.querySelector(".form-success");
-    formSuccess.innerHTML = ` <strong>The form submitted successfuly with the following information: </strong>
-                              <p>
-                                First name: ${data.firstName}<br />
-                                Last name: ${data.lastName}<br />
-                                Email: ${data.email}<br />
-                                Message:<br />
-                                ${data.message}<br />
-                              </p>
-                              `;
-    formSuccess.style.display = "block";
   }
+
+  const firstNameInputChange = (e) => {
+    setInputs({ ...input, firstName: e.target.value });
+  };
+  const lastNameInputChange = (e) => {
+    setInputs({ ...input, lastName: e.target.value });
+  };
+  const emailInputChange = (e) => {
+    setInputs({ ...input, email: e.target.value });
+  };
+  const messageInputChange = (e) => {
+    setInputs({ ...input, message: e.target.value });
+  };
 
   return (
     <Container>
       <Alert
         variant="success"
-        className="form-success"
+        className="form__success"
+        // I need this inline style to hide the alert until successful submit.
         style={{ display: "none" }}
       ></Alert>
+      {success && <Success input={input} />}
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Row>
           <Form.Group as={Col} controlId="firstName">
@@ -51,11 +64,13 @@ function Contact() {
               name="firstName"
               type="text"
               placeholder="First name"
+              value={input.firstName}
+              onChange={firstNameInputChange}
               ref={register({ required: true })}
             />
             <Form.Text>
               {errors.firstName && (
-                <span style={{ color: "red" }}>{errors.firstName.message}</span>
+                <span className="form__error">{errors.firstName.message}</span>
               )}
             </Form.Text>
           </Form.Group>
@@ -66,11 +81,13 @@ function Contact() {
               name="lastName"
               type="text"
               placeholder="Last name"
+              value={input.lastName}
+              onChange={lastNameInputChange}
               ref={register({ required: true })}
             />
             <Form.Text>
               {errors.lastName && (
-                <span style={{ color: "red" }}>{errors.lastName.message}</span>
+                <span className="form__error">{errors.lastName.message}</span>
               )}
             </Form.Text>
           </Form.Group>
@@ -82,11 +99,13 @@ function Contact() {
             name="email"
             type="email"
             placeholder="Email"
+            value={input.email}
+            onChange={emailInputChange}
             ref={register({ required: true })}
           />
           <Form.Text>
             {errors.email && (
-              <span style={{ color: "red" }}>{errors.email.message}</span>
+              <span className="form__error">{errors.email.message}</span>
             )}
           </Form.Text>
         </Form.Group>
@@ -97,15 +116,16 @@ function Contact() {
             as="textarea"
             name="message"
             placeholder="Message"
+            value={input.message}
+            onChange={messageInputChange}
             ref={register({ required: true })}
           />
           <Form.Text>
             {errors.message && (
-              <span style={{ color: "red" }}>{errors.message.message}</span>
+              <span className="form__error">{errors.message.message}</span>
             )}
           </Form.Text>
         </Form.Group>
-
         <Button type="submit">Submit</Button>
       </Form>
     </Container>

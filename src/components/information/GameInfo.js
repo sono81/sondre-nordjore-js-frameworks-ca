@@ -6,7 +6,7 @@ function GameInfo({ details }) {
 
   return (
     <>
-      <div className="genres">
+      <div className="game__genres">
         <p>Genres:
         <ul>
           {genres.map(function (gen, id) {
@@ -15,7 +15,7 @@ function GameInfo({ details }) {
         </ul>
         </p>
       </div>
-      <div className="platforms">
+      <div className="game__platforms">
         <p>Platforms:
         <ul>
           {platforms.map(function (pla, id) {

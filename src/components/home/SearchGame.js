@@ -9,8 +9,7 @@ function SearchGame({ handleSearch }) {
       <FormControl
         type="text"
         placeholder="Search Game..."
-        className="w-75 mb-4"
-        style={{ margin: "0 auto", float: "none" }}
+        className="w-75 mb-4 game__search"
         onChange={(e) => handleSearch(e)}
       />
     </Form>

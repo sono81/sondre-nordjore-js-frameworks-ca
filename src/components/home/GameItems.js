@@ -12,13 +12,15 @@ function GameItems({ name, background_image, rating, released, id }) {
         <Card.Img
           variant="top"
           src={background_image}
+          className="game__card--img"
+          //Look in report for why I used inline style here
           style={{ height: "200px", width: "100%", objectFit: "cover" }}
         />
         <Card.Body>
           <Card.Title>{name}</Card.Title>
           <Card.Text>
-            Release Date: {released} <br />
-            Rating: {rating}
+            <p>Release Date: {released}</p>
+            <p>Rating: {rating}</p>
           </Card.Text>
           <Link to={"games/" + id}>
             <Button variant="primary">Details...</Button>

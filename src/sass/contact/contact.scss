@@ -1,0 +1,22 @@
+.form {
+    &__error {
+        color: red;
+    }
+
+    &__success {
+        background-color: lightgreen;
+        max-width: 690px;
+        margin: 0 auto;
+
+        &--heading {
+            font-size: larger;
+            background-color: green;
+            color: white;
+            padding: 5px;
+        }
+
+        &--body {
+            padding: 5px;
+        }
+    }
+}

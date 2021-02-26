@@ -36,7 +36,7 @@ function GameDetails() {
         <Col xs={6}>
           <Image src={details.background_image} fluid />
         </Col>
-        <Col xs={6} className="game-details">
+        <Col xs={6} className="game__details">
           <GameInfo details={details} />
         </Col>
       </Row>
